@@ -1,20 +1,21 @@
 package org.example.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.example.base.PersistentObject;
-
+@Entity
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
 public class User extends PersistentObject {
-    @Column(name = "username")
-    String username;
+    @Column(name = "login")
+    String login;
     @Column(name = "password")
     String password;
     @Column(name = "email")
@@ -25,4 +26,5 @@ public class User extends PersistentObject {
     String lastName;
     @Column(name = "role")
     UserRoleType role;
+
 }
