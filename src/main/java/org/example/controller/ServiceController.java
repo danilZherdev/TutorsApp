@@ -1,17 +1,21 @@
 package org.example.controller;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.example.dto.request.UserRequestDto;
 import org.example.dto.response.ServiceResponseDto;
 import org.example.service.ServiceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/service")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ServiceController {
-    @Autowired
+
     ServiceService serviceService;
 
     @PostMapping("/register")

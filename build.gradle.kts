@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.0.2"
+	id("org.springframework.boot") version "2.7.2"
 	id("io.spring.dependency-management") version "1.1.0"
 }
 
@@ -30,10 +30,10 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	implementation("mysql:mysql-connector-java:8.0.32")
-//	implementation("org.springdoc:springdoc-openapi-ui:1.6.12")
-	implementation("io.springfox:springfox-boot-starter:3.0.0")
-	implementation("io.springfox:springfox-swagger-ui:3.0.0")
+	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.12")
 //	implementation("org.jacoco:jacoco-maven-plugin:0.8.8")
+
 
 }
 

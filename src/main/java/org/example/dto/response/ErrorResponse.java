@@ -1,4 +1,4 @@
 package org.example.dto.response;
 
-public class ErrorResponce {
+public class ErrorResponse {
 }
