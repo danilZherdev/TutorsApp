@@ -14,9 +14,9 @@ import org.example.base.PersistentObject;
 @Table(name = "rel_services_subjects")
 public class ServiceSubject extends PersistentObject {
     @ManyToOne
-    @JoinColumn(name = "service_id")
+    @JoinColumn(name = "service_id", nullable = false)
     Service service;
     @ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "subject_id", nullable = false)
     Subject subject;
 }

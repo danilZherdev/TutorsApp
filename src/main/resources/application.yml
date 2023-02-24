@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 7454
 spring:
   jpa:
-    hibernate:
-      ddl-auto: create
+    hibernate: org.hibernate.dialect.MySQLDialect
+    ddl-auto: update
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root

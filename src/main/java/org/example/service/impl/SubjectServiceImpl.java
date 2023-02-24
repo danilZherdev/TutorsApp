@@ -10,6 +10,7 @@ import org.example.service.SubjectService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
@@ -38,6 +39,10 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<SubjectResponseDto> getAll() {
-        return null;
+        return subjectRepository
+                .findAll()
+                .stream()
+                .map(s -> new SubjectResponseDto(s.getTitle(), s.getDescription()))
+                .collect(Collectors.toList());
     }
 }

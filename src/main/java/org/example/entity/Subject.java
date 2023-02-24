@@ -15,13 +15,11 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "subjects")
 public class Subject  extends PersistentObject {
-    @Column(name = "Title")
+    @Column(name = "Title", nullable = false)
     String title;
-    @Column(name = "Description")
+    @Column(name = "Description", nullable = false)
     String description;
-//    @OneToMany
-//    @JoinColumn(name = "rel_services_subjects_id", nullable = false)
-//    List<ServiceSubject> serviceSubjectId;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     User user;

@@ -7,6 +7,7 @@ import org.example.dto.response.UserResponseDto;
 import org.example.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,24 +17,34 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
     @PostMapping("/register")
     public void registration(@RequestBody UserRequestDto request) {
         userService.create(request);
     }
+
     @PostMapping("/login")
     public AuthResponseDto login(@RequestBody AuthRequestDto request) {
-        return null;
+        return userService.login(request);
     }
+
+    @Secured({"ADMIN", "TUTOR"})
     @PutMapping
     public void update(@RequestBody UserRequestDto request) {
     }
+
+    @Secured({"ADMIN"})
     @DeleteMapping
     public void delete(@RequestParam long userId) {
     }
+
+    @Secured({"ADMIN", "TTOR"})
     @GetMapping
     public UserResponseDto get(@PathVariable long userId) {
         return userService.get(userId);
     }
+
+    @Secured({"ADMIN"})
     @GetMapping("all")
     public List<UserResponseDto> getAll(){
         return userService.getAll();

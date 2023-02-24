@@ -21,18 +21,27 @@ repositories {
 extra["testcontainersVersion"] = "1.17.6"
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-//	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.testcontainers:junit-jupiter")
+
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	implementation("mysql:mysql-connector-java:8.0.32")
-	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+
+
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.12")
-//	implementation("org.jacoco:jacoco-maven-plugin:0.8.8")
+
+	implementation ("io.jsonwebtoken:jjwt-api:0.11.2")
+	runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.2")
+	runtimeOnly ("io.jsonwebtoken:jjwt-jackson:0.11.2")
+
+	implementation("org.jacoco:jacoco-maven-plugin:0.8.8")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
 
 
 }
@@ -46,3 +55,5 @@ dependencyManagement {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+

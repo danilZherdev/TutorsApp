@@ -12,17 +12,17 @@ import org.example.base.PersistentObject;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
 public class User extends PersistentObject {
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, unique = true)
     String login;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     String password;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     String email;
     @Column(name = "first_name")
     String firstName;
     @Column(name = "last_name")
     String lastName;
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     UserRoleType role;
 
 }

@@ -15,11 +15,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "services")
 public class Service extends PersistentObject {
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     String name;
-//    @OneToMany
-//    @JoinColumn(name = "rel_services_subjects_id", nullable = false)
-//    List<ServiceSubject> serviceSubjectId;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     User user;

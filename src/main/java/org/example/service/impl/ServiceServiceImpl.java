@@ -10,6 +10,8 @@ import org.example.service.ServiceService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @RequiredArgsConstructor
@@ -17,12 +19,17 @@ public class ServiceServiceImpl implements ServiceService {
     ServiceRepository serviceRepository;
     @Override
     public List<ServiceResponseDto> getAll() {
-        return null;
+
+        return serviceRepository
+                .findAll()
+                .stream()
+                .map(s -> new ServiceResponseDto(s.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public void create(UserRequestDto request) {
-
+        
     }
 
     @Override
