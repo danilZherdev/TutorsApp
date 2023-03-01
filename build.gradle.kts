@@ -27,7 +27,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
-	testImplementation("org.testcontainers:junit-jupiter")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+	testImplementation("org.testcontainers:junit-jupiter:${property("testcontainersVersion")}")
+	testImplementation("org.testcontainers:mysql:${property("testcontainersVersion")}")
 
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
@@ -40,10 +42,7 @@ dependencies {
 	runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.2")
 	runtimeOnly ("io.jsonwebtoken:jjwt-jackson:0.11.2")
 
-	implementation("org.jacoco:jacoco-maven-plugin:0.8.8")
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-
-
+//	implementation("org.jacoco:jacoco-maven-plugin:0.8.8")
 }
 
 dependencyManagement {

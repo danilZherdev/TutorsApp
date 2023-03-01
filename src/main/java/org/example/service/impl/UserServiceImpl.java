@@ -3,7 +3,6 @@ package org.example.service.impl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import org.example.dto.request.AuthRequestDto;
@@ -16,6 +15,7 @@ import org.example.exception.BaseRuntimeException;
 import org.example.repository.UserRepository;
 import org.example.service.UserService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +25,16 @@ import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     UserRepository  userRepository;
+
+    String secretKey;
+
+    public UserServiceImpl(UserRepository userRepository, @Value("${jwt.secret}") String secretKey) {
+        this.userRepository = userRepository;
+        this.secretKey = secretKey;
+    }
+
     @Override
     public List<UserResponseDto> getAll() {
         return null;
@@ -81,13 +88,11 @@ public class UserServiceImpl implements UserService {
             throw new BaseRuntimeException(HttpStatus.BAD_REQUEST, "Пользователь не найден");
 
         if(!user.get().getPassword().equals(request.getPassword()))
-            throw new BaseRuntimeException(HttpStatus.BAD_REQUEST, "пароль");
+            throw new BaseRuntimeException(HttpStatus.BAD_REQUEST, "Неверный пароль");
 
         String token = Jwts.builder()
                 .setSubject(request.getLogin())
-                .signWith(SignatureAlgorithm.HS512,
-                        "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCKXsBGx7l8ze1Dqlbgt3sFPYgBBWg4lwDb5KbB1KBvQB0mMZIu/" +
-                                "9qZUToFyztbYZCJ7Utb9bYfvkDsVDa9Bqn4zkoSJUDQqac2uRHo3Up4WFMzhT2EB1iKZRYAteBG7Dr+i0e/kPes+3uentGPnBeQHGfZCgzAG1cYNoxB/PJ7uwIDAQAB")
+                .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
         return new AuthResponseDto(token);
     }

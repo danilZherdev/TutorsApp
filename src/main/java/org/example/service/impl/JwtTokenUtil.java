@@ -21,8 +21,7 @@ public class JwtTokenUtil {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 часов
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
+                .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
@@ -35,7 +34,11 @@ public class JwtTokenUtil {
     }
 
     private Date extractExpiration(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getExpiration();
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
     }
 
     private String extractUsername(String token) {
