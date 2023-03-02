@@ -47,4 +47,9 @@ public class ServiceController {
     public List<ServiceResponseDto> getAll(){
         return serviceService.getAll();
     }
+
+    @GetMapping("/by-subject")
+    public List<ServiceResponseDto> getServices(@RequestParam long subjectId) {
+        return serviceService.getServices(subjectId);
+    }
 }

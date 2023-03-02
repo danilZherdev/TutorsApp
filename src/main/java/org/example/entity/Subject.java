@@ -19,8 +19,4 @@ public class Subject  extends PersistentObject {
     String title;
     @Column(name = "Description", nullable = false)
     String description;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    User user;
 }

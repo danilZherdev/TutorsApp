@@ -1,9 +1,6 @@
 server:
   port: 7454
 spring:
-  jpa:
-    hibernate: org.hibernate.dialect.MySQL8Dialect
-    ddl-auto: create
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -16,6 +13,10 @@ spring:
     #     passwords to DB
     password: sapereaude8
 #    password: sapereaude8
+  jpa:
+    hibernate: org.hibernate.dialect.MySQLDialect
+    generate-ddl: true
+    ddl-auto: update
 jwt:
   secret: ${JWT_SECRET_TOKEN:MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCKXsBGx7l8ze1Dqlbgt3sFPYgBBWg4lwDb5KbB1KBvQB0mMZIu/9qZUToFyztbYZCJ7Utb9bYfvkDsVDa9Bqn4zkoSJUDQqac2uRHo3Up4WFMzhT2EB1iKZRYAteBG7Dr+i0e/kPes+3uentGPnBeQHGfZCgzAG1cYNoxB/PJ7uwIDAQAB}
   expire: 3600000

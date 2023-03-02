@@ -1,13 +1,12 @@
 package org.example.entity;
 
-import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.example.base.PersistentObject;
 
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,8 +16,12 @@ import java.util.List;
 public class Service extends PersistentObject {
     @Column(name = "name", nullable = false)
     String name;
-
+    @Column(name = "price", nullable = false)
+    long price;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     User user;
+    @ManyToOne
+    @JoinColumn(name = "subject_id", nullable = true)
+    Subject subject;
 }

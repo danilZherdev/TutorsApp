@@ -22,7 +22,12 @@ public class User extends PersistentObject {
     String firstName;
     @Column(name = "last_name")
     String lastName;
-    @Column(name = "role", nullable = false)
+    @Column(name = "role")
     UserRoleType role;
-
+    @Column(name = "status")
+    StatusType status;
+    @Column(name = "experience")
+    String experience;
+    @Column(name = "rating")
+    double rating;
 }

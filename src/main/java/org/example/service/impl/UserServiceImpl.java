@@ -1,43 +1,43 @@
 package org.example.service.impl;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-
 import org.example.dto.request.AuthRequestDto;
 import org.example.dto.request.UserRequestDto;
 import org.example.dto.response.AuthResponseDto;
 import org.example.dto.response.UserResponseDto;
+import org.example.entity.StatusType;
 import org.example.entity.User;
 import org.example.entity.UserRoleType;
 import org.example.exception.BaseRuntimeException;
 import org.example.repository.UserRepository;
+import org.example.service.JWTMapper;
 import org.example.service.UserService;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class UserServiceImpl implements UserService {
     UserRepository  userRepository;
+    JWTMapper jwtMapper;
 
-    String secretKey;
-
-    public UserServiceImpl(UserRepository userRepository, @Value("${jwt.secret}") String secretKey) {
+    public UserServiceImpl(UserRepository userRepository, JWTMapper jwtMapper) {
         this.userRepository = userRepository;
-        this.secretKey = secretKey;
+        this.jwtMapper = jwtMapper;
     }
 
     @Override
     public List<UserResponseDto> getAll() {
-        return null;
+        return userRepository.findAll()
+                .stream()
+                .map(UserResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
         newUser.setLastName(request.getLastName());
         newUser.setRole(request.getRole());
         newUser.setCreatedAt(new Date());
+        newUser.setStatus(StatusType.FREE);
         userRepository.save(newUser);
     }
 
@@ -90,10 +91,14 @@ public class UserServiceImpl implements UserService {
         if(!user.get().getPassword().equals(request.getPassword()))
             throw new BaseRuntimeException(HttpStatus.BAD_REQUEST, "Неверный пароль");
 
-        String token = Jwts.builder()
-                .setSubject(request.getLogin())
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
+//        String token = Jwts.builder()
+//                .setClaims(tokenDetailToMap(details))
+//                .setIssuedAt(new Date()).setExpiration(new Date((new Date()).getTime() + expirationTime))
+//                .signWith(SignatureAlgorithm.HS512, secretKey)
+//                .setExpiration(ZonedDateTime.now().plusYears(1).)
+//                .compact();
+//        return new AuthResponseDto(token);
+        var token = jwtMapper.create(new JWTMapper.TokenDetails(user.get().getId(), user.get().getLogin()));
         return new AuthResponseDto(token);
     }
 }

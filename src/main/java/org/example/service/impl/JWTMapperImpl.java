@@ -59,8 +59,10 @@ public class JWTMapperImpl implements JWTMapper {
                 .setSigningKey(jwtSecret);
 
         try {
-            var claims = parser.parseClaimsJws(token).getBody();
-            mapToTokenDetails(claims);
+            var claims = parser.parseClaimsJws(token);
+//            var claims = parser.parseClaimsJws(token).getBody();
+            var body = claims.getBody();
+            mapToTokenDetails(body);
             return true;
         } catch (Exception ex) {
             return false;
