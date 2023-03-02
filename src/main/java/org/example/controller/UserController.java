@@ -38,13 +38,13 @@ public class UserController {
     public void delete(@RequestParam long userId) {
     }
 
-    @Secured({"ADMIN", "TTOR"})
+    @Secured({"ADMIN", "TUTOR"})
     @GetMapping
     public UserResponseDto get(@PathVariable long userId) {
         return userService.get(userId);
     }
 
-    @Secured({"ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     @GetMapping("all")
     public List<UserResponseDto> getAll(){
         return userService.getAll();
