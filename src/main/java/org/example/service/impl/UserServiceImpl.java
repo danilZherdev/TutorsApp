@@ -99,6 +99,6 @@ public class UserServiceImpl implements UserService {
 //                .compact();
 //        return new AuthResponseDto(token);
         var token = jwtMapper.create(new JWTMapper.TokenDetails(user.get().getId(), user.get().getLogin()));
-        return new AuthResponseDto(token);
+        return new AuthResponseDto(token, user.get().getFirstName() + " " + user.get().getLastName());
     }
 }

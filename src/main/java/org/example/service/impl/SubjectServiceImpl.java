@@ -42,7 +42,7 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectRepository
                 .findAll()
                 .stream()
-                .map(s -> new SubjectResponseDto(s.getTitle(), s.getDescription()))
+                .map(s -> new SubjectResponseDto(s.getId(), s.getTitle(), s.getDescription()))
                 .collect(Collectors.toList());
     }
 }

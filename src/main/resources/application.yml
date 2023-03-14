@@ -11,7 +11,7 @@ spring:
       maximumPoolSize: '5'
     url: jdbc:mysql://localhost:3306/tutor_app
     #     passwords to DB
-    password: sapereaude8
+    password: 123456
 #    password: sapereaude8
   jpa:
     hibernate: org.hibernate.dialect.MySQLDialect

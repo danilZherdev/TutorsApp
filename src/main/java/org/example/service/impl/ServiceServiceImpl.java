@@ -89,7 +89,7 @@ public class ServiceServiceImpl implements ServiceService {
         return services.stream()
                 .map(s -> new ServiceResponseDto(
                         s.getName(),
-                        new SubjectResponseDto(subject.get().getTitle(), subject.get().getDescription()),
+                        new SubjectResponseDto(subject.get().getId(), subject.get().getTitle(), subject.get().getDescription()),
                         new UserResponseDto(s.getUser()),
                         s.getUser().getExperience(),
                         s.getUser().getStatus(),

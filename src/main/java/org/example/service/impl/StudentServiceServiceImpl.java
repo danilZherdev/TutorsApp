@@ -59,7 +59,7 @@ public class StudentServiceServiceImpl implements StudentServiceService {
         ));
         studentServiceDto.setService(new ServiceResponseDto(
                 service.get().getName(),
-                new SubjectResponseDto(service.get().getSubject().getTitle(),service.get().getSubject().getDescription()),
+                new SubjectResponseDto(service.get().getSubject().getId(),service.get().getSubject().getTitle(),service.get().getSubject().getDescription()),
                 new UserResponseDto(service.get().getUser()),
                 service.get().getUser().getExperience(),
                 service.get().getUser().getStatus(),
